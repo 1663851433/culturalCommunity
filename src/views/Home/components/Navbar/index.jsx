@@ -5,7 +5,6 @@ import "./index.scss";
 import React from "react";
 import {
   Popover,
-  TextField,
   Button,
   List,
   ListItem,
@@ -31,12 +30,11 @@ const Navbar = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
   return (
     <div className="navbar">
       <div className="left-logo">
         <AccountBalanceIcon sx={{ color: "#ff4500" }} />
-        Community
+        &nbsp; Community
       </div>
       <div className="search">
         <SearchOutlinedIcon />
@@ -51,13 +49,12 @@ const Navbar = () => {
         <div className="more-icon">
           <MoreHoriz onClick={btnMore} />
           <Popover
-            id={id}
             open={open}
             anchorEl={anchorEl}
             onClose={handleClose}
             anchorOrigin={{
               vertical: "bottom",
-              horizontal: "left",
+              horizontal: "right",
             }}
           >
             <Box
