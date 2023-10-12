@@ -11,11 +11,23 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  TextField,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  Divider,
 } from "@mui/material";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
-import { MoreHoriz, Inbox as InboxIcon } from "@mui/icons-material";
+import {
+  MoreHoriz,
+  Inbox as InboxIcon,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 import BaseDialog from "@/components/dialogCommon/index.jsx";
 
 import { useState } from "react";
@@ -24,6 +36,7 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const open = Boolean(anchorEl);
+  const [showPassword, setShowPassword] = useState(false);
 
   const btnMore = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,7 +46,9 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const dialogClose = () => {};
+  const dialogClose = () => {
+    setDialogVisible(false);
+  };
 
   const btnSignUp = () => {
     setDialogVisible(true);
@@ -74,12 +89,12 @@ const Navbar = () => {
                 }}
               >
                 <List>
-                  <ListItem disablePadding>
+                  <ListItem disablePadding onClick={btnSignUp}>
                     <ListItemButton>
                       <ListItemIcon>
                         <InboxIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Sign Up" onClick={btnSignUp} />
+                      <ListItemText primary="Sign Up" />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -88,7 +103,51 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <BaseDialog title="login" open={true} />
+      <BaseDialog
+        title="Sign Up"
+        className="sign-form"
+        open={dialogVisible}
+        onClose={dialogClose}
+      >
+        <div className="form-main">
+          <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
+            <OutlinedInput label="Email" />
+          </FormControl>
+          <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">Name</InputLabel>
+            <OutlinedInput label="Name" />
+          </FormControl>
+          <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword((show) => !show)}
+                    onMouseDown={(e) => e.preventDefault()}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+        </div>
+        <div className="form-footer">
+          <Divider />
+          <Button variant="contained" color="warning" size="large">
+            Sign In
+          </Button>
+        </div>
+      </BaseDialog>
     </>
   );
 };

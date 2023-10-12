@@ -1,16 +1,26 @@
 import { Dialog, DialogTitle } from "@mui/material";
+import { CancelOutlined as CancelOutlinedIcon } from "@mui/icons-material";
 import { useState } from "react";
 
 const BaseDialog = (props) => {
-  const { onClose, selectedValue, open, title } = props;
+  const { onClose, open, title } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>{title}</DialogTitle>
+    <Dialog onClose={handleClose} open={open} {...props}>
+      <DialogTitle
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        {title}
+        <CancelOutlinedIcon sx={{ cursor: "pointer" }} onClick={handleClose} />
+      </DialogTitle>
       {props.children}
     </Dialog>
   );

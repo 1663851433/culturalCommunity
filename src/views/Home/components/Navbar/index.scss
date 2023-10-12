@@ -46,6 +46,24 @@
   }
 }
 
+// sign-form
+.sign-form {
+  .form-main {
+    padding: 20px;
+    text-align: center;
+    .form-item + .form-item {
+      margin-top: 20px;
+    }
+  }
+  .form-footer {
+    text-align: center;
+    .MuiButtonBase-root {
+      width: 80%;
+      margin: 10px;
+    }
+  }
+}
+
 @media screen and (min-width: 1200px) {
   .search {
     flex: 0 0 500px;
