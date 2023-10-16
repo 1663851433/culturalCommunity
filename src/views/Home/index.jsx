@@ -3,17 +3,15 @@
  * @returns Home Page
  */
 import "./index.scss";
-import Navbar from "@/views/Home/components/Navbar/index";
-import LeftTreeList from "@/views/Home/components/TreeList/index";
-import SelectionMain from "@/views/Home/components/SelectionMain/index";
+import Navbar from "@/components/Navbar/index";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   return (
     <div className="home">
       <Navbar />
       <div className="main-container">
-        <LeftTreeList />
-        <SelectionMain />
+        <Outlet />
       </div>
     </div>
   );

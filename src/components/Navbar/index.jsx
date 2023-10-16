@@ -11,7 +11,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  TextField,
   FormControl,
   InputLabel,
   OutlinedInput,
@@ -19,24 +18,27 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import {
   MoreHoriz,
   Inbox as InboxIcon,
   Visibility,
   VisibilityOff,
+  Add as AddIcon,
+  AccountBalance as AccountBalanceIcon,
+  SearchOutlined as SearchOutlinedIcon,
+  HighlightOffOutlined as HighlightOffOutlinedIcon,
 } from "@mui/icons-material";
 import BaseDialog from "@/components/dialogCommon/index.jsx";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const open = Boolean(anchorEl);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const btnMore = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,7 +58,7 @@ const Navbar = () => {
   return (
     <>
       <div className="navbar">
-        <div className="left-logo">
+        <div className="left-logo" onClick={() => navigate("/")}>
           <AccountBalanceIcon sx={{ color: "#ff4500" }} />
           &nbsp; Community
         </div>
@@ -66,6 +68,10 @@ const Navbar = () => {
           <HighlightOffOutlinedIcon />
         </div>
         <div className="right">
+          <IconButton onClick={() => navigate("/home/createPost")}>
+            <AddIcon />
+          </IconButton>
+          &nbsp;
           <Button variant="contained" color="warning">
             Log In
           </Button>
